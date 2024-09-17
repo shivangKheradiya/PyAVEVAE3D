@@ -3,18 +3,44 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35222.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PyAVEVAE3DPlugin", "PyAVEVAE3DPlugin\PyAVEVAE3DPlugin.csproj", "{A4666E3F-D3E5-4836-913F-CA2B01B17A0D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PyAVEVAInteraction", "PyAVEVAInteraction\PyAVEVAInteraction.vcxproj", "{C103FE39-B8E4-40A4-89D2-9DEFEA681AB3}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PyDllTest", "PyDllTest\PyDllTest.vcxproj", "{A333198B-A79C-431D-83E5-6607A33AF8FB}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PyAVEVAE3DEmb", "PyAVEVAE3DEmb\PyAVEVAE3DEmb.vcxproj", "{4135F815-73F2-4CDC-A0C8-968244EAA716}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A4666E3F-D3E5-4836-913F-CA2B01B17A0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A4666E3F-D3E5-4836-913F-CA2B01B17A0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A4666E3F-D3E5-4836-913F-CA2B01B17A0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A4666E3F-D3E5-4836-913F-CA2B01B17A0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C103FE39-B8E4-40A4-89D2-9DEFEA681AB3}.Debug|x64.ActiveCfg = Debug|Win32
+		{C103FE39-B8E4-40A4-89D2-9DEFEA681AB3}.Debug|x64.Build.0 = Debug|Win32
+		{C103FE39-B8E4-40A4-89D2-9DEFEA681AB3}.Debug|x86.ActiveCfg = Debug|Win32
+		{C103FE39-B8E4-40A4-89D2-9DEFEA681AB3}.Debug|x86.Build.0 = Debug|Win32
+		{C103FE39-B8E4-40A4-89D2-9DEFEA681AB3}.Release|x64.ActiveCfg = Release|x64
+		{C103FE39-B8E4-40A4-89D2-9DEFEA681AB3}.Release|x64.Build.0 = Release|x64
+		{C103FE39-B8E4-40A4-89D2-9DEFEA681AB3}.Release|x86.ActiveCfg = Release|Win32
+		{C103FE39-B8E4-40A4-89D2-9DEFEA681AB3}.Release|x86.Build.0 = Release|Win32
+		{A333198B-A79C-431D-83E5-6607A33AF8FB}.Debug|x64.ActiveCfg = Debug|x64
+		{A333198B-A79C-431D-83E5-6607A33AF8FB}.Debug|x64.Build.0 = Debug|x64
+		{A333198B-A79C-431D-83E5-6607A33AF8FB}.Debug|x86.ActiveCfg = Debug|Win32
+		{A333198B-A79C-431D-83E5-6607A33AF8FB}.Debug|x86.Build.0 = Debug|Win32
+		{A333198B-A79C-431D-83E5-6607A33AF8FB}.Release|x64.ActiveCfg = Release|x64
+		{A333198B-A79C-431D-83E5-6607A33AF8FB}.Release|x64.Build.0 = Release|x64
+		{A333198B-A79C-431D-83E5-6607A33AF8FB}.Release|x86.ActiveCfg = Release|Win32
+		{A333198B-A79C-431D-83E5-6607A33AF8FB}.Release|x86.Build.0 = Release|Win32
+		{4135F815-73F2-4CDC-A0C8-968244EAA716}.Debug|x64.ActiveCfg = Debug|x64
+		{4135F815-73F2-4CDC-A0C8-968244EAA716}.Debug|x64.Build.0 = Debug|x64
+		{4135F815-73F2-4CDC-A0C8-968244EAA716}.Debug|x86.ActiveCfg = Debug|Win32
+		{4135F815-73F2-4CDC-A0C8-968244EAA716}.Debug|x86.Build.0 = Debug|Win32
+		{4135F815-73F2-4CDC-A0C8-968244EAA716}.Release|x64.ActiveCfg = Release|x64
+		{4135F815-73F2-4CDC-A0C8-968244EAA716}.Release|x64.Build.0 = Release|x64
+		{4135F815-73F2-4CDC-A0C8-968244EAA716}.Release|x86.ActiveCfg = Release|Win32
+		{4135F815-73F2-4CDC-A0C8-968244EAA716}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

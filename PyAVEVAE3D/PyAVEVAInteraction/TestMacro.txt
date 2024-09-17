@@ -1,0 +1,9 @@
+console show
+import 'C:\Program Files (x86)\AVEVA\Everything3D2.10\skDlls\PyAVEVAInteraction'
+using namespace 'PyAVEVAInteraction'
+!x = object PyAVEVAInteractionObj()
+!X.RunInVenvPy()
+!X.RunInSysPy()
+Q VAR !X.METHODS()
+!Y = !X.LaunchVenvCmd(|hI tHERE|)
+!x.LaunchVenvCmdd()
