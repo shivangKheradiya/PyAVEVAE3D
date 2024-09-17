@@ -118,6 +118,12 @@
   <ItemGroup>
     <ClCompile Include="test.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Aveva.Core.Database">
+      <HintPath>..\..\..\..\Program Files (x86)\AVEVA\Everything3D2.10\Aveva.Core.Database.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

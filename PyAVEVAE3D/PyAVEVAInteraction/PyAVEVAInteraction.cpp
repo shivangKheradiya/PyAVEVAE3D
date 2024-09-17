@@ -3,6 +3,7 @@
 
 using namespace PyAVEVAInteraction;
 using namespace std;
+using namespace System::Runtime::InteropServices;
 
 PyAVEVAInteractionObj::PyAVEVAInteractionObj() {}
 
@@ -107,13 +108,13 @@ void PyAVEVAInteractionObj::LaunchVenvCmddd() {
 	}
 }
 
-void PyAVEVAInteractionObj::RunInVenvPy() {
+void PyAVEVAInteractionObj::RunInVenvPy(System::String^ venv_exe_path, System::String^ filePath) {
 	try
 	{
 		PyConfig pyConfig;
 		PyStatus pyStatus;
-		const wchar_t* wch_venv_exe_path = L"C:\\Program Files (x86)\\AVEVA\\Everything3D2.10\\skDlls\\pyEnv\\Scripts\\python.exe";
-		//pin_ptr<const wchar_t> wch_venv_exe_path = PtrToStringChars(venv_exe_path);
+		//const wchar_t* wch_venv_exe_path = L"C:\\Program Files (x86)\\AVEVA\\Everything3D2.10\\skDlls\\pyEnv\\Scripts\\python.exe";
+		pin_ptr<const wchar_t> wch_venv_exe_path = PtrToStringChars(venv_exe_path);
 		//auto wch_venv_exe_path = L"C:\\Program Files (x86)\\AVEVA\\Everything3D2.10\\skDlls\\pyEnv\\Scripts\\python.exe";
 
 		PyConfig_InitIsolatedConfig(&pyConfig);
@@ -129,10 +130,12 @@ void PyAVEVAInteractionObj::RunInVenvPy() {
 		//}
 
 		PyConfig_Clear(&pyConfig);
-		
-		Console::WriteLine("Python Execution From .Py File At C:\\db\\test.py");
-		const char* pythonFilePath = "C:\\db\\test.py";
-		PyAVEVAInteractionObj::RunPythonFile(pythonFilePath);
+
+		const char* ch_py_file_path = (char*)(void*)Marshal::StringToHGlobalAnsi(filePath);
+		Console::WriteLine("Python Execution From .Py File At " + filePath->ToString());
+			//C:\\db\\test.py");
+		//const char* pythonFilePath = "C:\\db\\test.py";
+		PyAVEVAInteractionObj::RunPythonFile(ch_py_file_path);
 
 		// Finalize Python interpreter
 		Py_Finalize();
@@ -162,6 +165,7 @@ System::String^ PyAVEVAInteractionObj::GetString(System::String^ message) {
 }
 
 void  PyAVEVAInteractionObj::RunPythonFile(const char* filePath) {
+
 	PyObject* obj = Py_BuildValue("s", filePath);
 	FILE* fd = _Py_fopen_obj(obj, "r");
 	//PyObject* pResult = PyRun_File(fd, filePath, Py_file_input);

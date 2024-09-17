@@ -2,6 +2,7 @@
 #include <exception>
 #include <cstdio>
 #include <cstring>
+#include <vcclr.h>
 
 #pragma once
 using namespace System;
@@ -25,7 +26,7 @@ namespace PyAVEVAInteraction {
 		[PMLNetCallable()]
 			void LaunchVenvCmddd();
 		[PMLNetCallable()]
-			void RunInVenvPy();
+			void RunInVenvPy(System::String^ venv_exe_path, System::String^ filePath);
 		[PMLNetCallable()]
 			void Assign(PyAVEVAInteractionObj that);
 		[PMLNetCallable()]
