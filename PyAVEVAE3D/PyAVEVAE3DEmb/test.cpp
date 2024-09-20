@@ -9,6 +9,7 @@
 #else
 #include <Python.h>
 #endif
+#include <vector>
 
 using namespace System;
 using namespace Aveva::Core::Database;
@@ -73,6 +74,26 @@ PyObject* get_ce(PyObject* /* unused module reference */) {
     Py_RETURN_NONE;
 }
 
+PyObject* attributes(PyObject* /* unused module reference */) {
+    try
+    {
+        PyObject* pyList = PyList_New(CurrentElement::Element->GetAttributes()->Length);
+        int i = 0;
+        for each (DbAttribute^ att in CurrentElement::Element->GetAttributes())
+        {
+            PyObject* attName = PyUnicode_FromString((char*)(void*)Marshal::StringToHGlobalAnsi(att->Name));
+            PyList_SetItem(pyList, i, attName);
+            i++;
+        }
+        return pyList;
+    }
+    catch (...)
+    {
+        Console::WriteLine("Unable to gather attributes");
+    }
+    Py_RETURN_NONE;
+}
+
 static PyMethodDef pyavevae3demb_methods[] = {
     // The first property is the name exposed to Python, fast_tanh
     // The second is the C++ function with the implementation
@@ -103,7 +124,7 @@ static PyMethodDef pml_Module_Methods[] = {
 };
 
 static PyMethodDef db_Module_Methods[] = {
-    {"hello", hello_world, METH_NOARGS, ""},
+    {"attributes", (PyCFunction)attributes, METH_NOARGS, nullptr},
     {nullptr, nullptr, 0, nullptr}
 };
 
