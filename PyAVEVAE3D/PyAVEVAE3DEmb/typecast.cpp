@@ -1,4 +1,4 @@
-#include "helper.h"
+#include "typecast.h"
 
 using namespace System;
 using namespace System::Runtime::InteropServices;

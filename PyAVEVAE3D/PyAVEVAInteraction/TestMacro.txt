@@ -3,6 +3,29 @@ import 'C:\Program Files (x86)\AVEVA\Everything3D2.10\skDlls\PyAVEVAInteraction'
 using namespace 'PyAVEVAInteraction'
 !x = object PyAVEVAInteractionObj()
 Q VAR !X.METHODS()
+!X.StartVenvPy( |C:/Program Files (x86)/AVEVA/Everything3D2.10/skDlls/pyEnv/Scripts/python.exe|)
+!x.EmbadeJupyter()
+!x.RunPyFileInVenv(|C:/db/e3dTest.py|)
+
+-- !x.RUNPYCODEINVENV(|import sys|)
+-- !x.RUNPYCODEINVENV(|import os|)
+-- !x.RUNPYCODEINVENV(|sys.path.append(os.path.dirname(sys.executable))|)
+-- !x.RUNPYCODEINVENV(|import ipykernel|)
+-- !x.RUNPYCODEINVENV(|from IPython import embed_kernel|)
+-- !x.RUNPYCODEINVENV(|embed_kernel()|)
+!x.RUNPYCODEINVENV(|import pyavevae3demb|)
+!x.RUNPYCODEINVENV(|pyavevae3demb.set_ce("/100-C-12")|)
+
+!x.RunPyFileInVenv(|C:/db/startJupyter.py|)
+!x.EmbadeJupyter()
+
+command to invoke Jupyter Notebook:
+jupyter console --existing "C:\Users\<YourUsername>\AppData\Roaming\jupyter\runtime\kernel-<id>.json"
+jupyter console --existing "C:\Users\Shiva\AppData\Roaming\jupyter\runtime\kernel-<id>.json"
+jupyter notebook
+
+!x.StopVenvPy()
+
 !X.RunInVenvPy( |C:/Program Files (x86)/AVEVA/Everything3D2.10/skDlls/pyEnv/Scripts/python.exe| , |C:/db/startJupyter.py|)
 !X.RunInVenvPy( |C:/Program Files (x86)/AVEVA/Everything3D2.10/skDlls/pyEnv/Scripts/python.exe| , |C:/db/e3dTest.py|)
 !X.RunInSysPy()

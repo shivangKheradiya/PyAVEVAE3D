@@ -3,6 +3,7 @@
 #include <cstdio>
 #include <cstring>
 #include <vcclr.h>
+#include "typecast.h"
 
 #pragma once
 using namespace System;
@@ -18,6 +19,16 @@ namespace PyAVEVAInteraction {
 		[PMLNetCallable()]
 			PyAVEVAInteractionObj();
 		[PMLNetCallable()]
+			void StartVenvPy(System::String^ venv_exe_path);
+		[PMLNetCallable()]
+			void RunPyFileInVenv(System::String^ filePath);
+		[PMLNetCallable()]
+			void RunPyCodeInVenv(System::String^ PythonCode);
+		[PMLNetCallable()]
+			void StopVenvPy();
+		[PMLNetCallable()]
+			void EmbadeJupyter();
+		[PMLNetCallable()]
 			System::Double LaunchVenvCmd(System::String^ venv_exe_path);
 		[PMLNetCallable()]
 			System::String^ GetString(System::String^ message);
@@ -32,5 +43,7 @@ namespace PyAVEVAInteraction {
 		[PMLNetCallable()]
 			~PyAVEVAInteractionObj();
 		void RunPythonFile(const char* filePath);
+		PyConfig* pyConfig;
+		PyStatus* pyStatus;
 	};
 }

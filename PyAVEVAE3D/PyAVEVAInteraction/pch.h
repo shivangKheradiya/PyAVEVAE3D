@@ -7,6 +7,7 @@
 #ifndef PCH_H
 #define PCH_H
 
+#define PY_SSIZE_T_CLEAN
 #include "pch.h"
 #ifdef _DEBUG
 #undef _DEBUG

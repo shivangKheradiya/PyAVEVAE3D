@@ -1,5 +1,6 @@
 #pragma once
 #include <vcclr.h>
+#include "typecast.h"
 
 #ifdef _DEBUG
 #undef _DEBUG

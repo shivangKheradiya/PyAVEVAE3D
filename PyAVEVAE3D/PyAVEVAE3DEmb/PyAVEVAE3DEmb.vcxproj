@@ -117,10 +117,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DbModule.cpp" />
-    <ClCompile Include="helper.cpp" />
     <ClCompile Include="PmlModule.cpp" />
     <ClCompile Include="PyAvevaE3dEmbModule.cpp" />
     <ClCompile Include="test.cpp" />
+    <ClCompile Include="typecast.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Aveva.Core.Database">
@@ -134,9 +134,9 @@
   <ItemGroup>
     <ClInclude Include="AllHeader.h" />
     <ClInclude Include="DbModule.h" />
-    <ClInclude Include="helper.h" />
     <ClInclude Include="PmlModule.h" />
     <ClInclude Include="PyAvevaE3dEmbModule.h" />
+    <ClInclude Include="typecast.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

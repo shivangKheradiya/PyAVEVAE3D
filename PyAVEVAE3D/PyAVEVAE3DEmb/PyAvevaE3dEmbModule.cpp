@@ -1,5 +1,4 @@
 #include "PyAvevaE3dEmbModule.h"
-#include "helper.h"
 
 using namespace Aveva::Core::Database;
 
