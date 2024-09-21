@@ -3,6 +3,7 @@ import 'C:\Program Files (x86)\AVEVA\Everything3D2.10\skDlls\PyAVEVAInteraction'
 using namespace 'PyAVEVAInteraction'
 !x = object PyAVEVAInteractionObj()
 Q VAR !X.METHODS()
+!X.RunInVenvPy( |C:/Program Files (x86)/AVEVA/Everything3D2.10/skDlls/pyEnv/Scripts/python.exe| , |C:/db/startJupyter.py|)
 !X.RunInVenvPy( |C:/Program Files (x86)/AVEVA/Everything3D2.10/skDlls/pyEnv/Scripts/python.exe| , |C:/db/e3dTest.py|)
 !X.RunInSysPy()
 Q VAR !X.METHODS()

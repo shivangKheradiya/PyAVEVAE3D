@@ -1,15 +1,8 @@
 #include <Windows.h>
 #include <cmath>
-#include <vcclr.h>
-
-#ifdef _DEBUG
-#undef _DEBUG
-#include <Python.h>
-#define _DEBUG
-#else
-#include <Python.h>
-#endif
+#include "AllHeader.h"
 #include <vector>
+#include "PyAvevaE3dEmbModule.h"
 
 using namespace System;
 using namespace Aveva::Core::Database;

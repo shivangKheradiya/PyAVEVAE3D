@@ -116,6 +116,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DbModule.cpp" />
+    <ClCompile Include="helper.cpp" />
+    <ClCompile Include="PmlModule.cpp" />
+    <ClCompile Include="PyAvevaE3dEmbModule.cpp" />
     <ClCompile Include="test.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -126,6 +130,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="e3dTest.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AllHeader.h" />
+    <ClInclude Include="DbModule.h" />
+    <ClInclude Include="helper.h" />
+    <ClInclude Include="PmlModule.h" />
+    <ClInclude Include="PyAvevaE3dEmbModule.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
