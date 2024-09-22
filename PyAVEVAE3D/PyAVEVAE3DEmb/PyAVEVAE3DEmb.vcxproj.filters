@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="test.cpp">
+    <ClCompile Include="PyAvevaE3dEmbInit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PyAvevaE3dEmbModule.cpp">

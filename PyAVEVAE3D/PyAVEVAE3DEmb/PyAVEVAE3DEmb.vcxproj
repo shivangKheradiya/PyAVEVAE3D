@@ -119,12 +119,16 @@
     <ClCompile Include="DbModule.cpp" />
     <ClCompile Include="PmlModule.cpp" />
     <ClCompile Include="PyAvevaE3dEmbModule.cpp" />
-    <ClCompile Include="test.cpp" />
+    <ClCompile Include="PyAvevaE3dEmbInit.cpp" />
     <ClCompile Include="typecast.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Aveva.Core.Database">
       <HintPath>..\..\..\..\Program Files (x86)\AVEVA\Everything3D2.10\Aveva.Core.Database.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Aveva.Core.Utilities">
+      <HintPath>..\..\..\..\Program Files (x86)\AVEVA\Everything3D2.10\Aveva.Core.Utilities.dll</HintPath>
       <Private>false</Private>
     </Reference>
   </ItemGroup>

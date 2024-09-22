@@ -1,5 +1,5 @@
 #pragma once
-static public ref class DbModule
+class DbModule
 {
 public:
 

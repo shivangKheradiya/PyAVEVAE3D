@@ -19,6 +19,10 @@ Q VAR !X.METHODS()
 !x.RunPyFileInVenv(|C:/db/startJupyter.py|)
 !x.EmbadeJupyter()
 
+!x.RUNPYCODEINVENV(|from pyavevae3demb import PML|)
+!x.RUNPYCODEINVENV(|x = PML()|)
+!x.RUNPYCODEINVENV(|x.Run("/ZONE-PIPING-AREA01")|)
+
 command to invoke Jupyter Notebook:
 jupyter console --existing "C:\Users\<YourUsername>\AppData\Roaming\jupyter\runtime\kernel-<id>.json"
 jupyter console --existing "C:\Users\Shiva\AppData\Roaming\jupyter\runtime\kernel-<id>.json"
