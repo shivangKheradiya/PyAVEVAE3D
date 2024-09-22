@@ -5,9 +5,12 @@ VisualStudioVersion = 17.11.35222.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PyAVEVAInteraction", "PyAVEVAInteraction\PyAVEVAInteraction.vcxproj", "{C103FE39-B8E4-40A4-89D2-9DEFEA681AB3}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PyDllTest", "PyDllTest\PyDllTest.vcxproj", "{A333198B-A79C-431D-83E5-6607A33AF8FB}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PyAVEVAE3DEmb", "PyAVEVAE3DEmb\PyAVEVAE3DEmb.vcxproj", "{4135F815-73F2-4CDC-A0C8-968244EAA716}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F9700B27-1937-4048-94CC-CACD97DEFBF2}"
+	ProjectSection(SolutionItems) = preProject
+		ToDo.txt = ToDo.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,14 +28,6 @@ Global
 		{C103FE39-B8E4-40A4-89D2-9DEFEA681AB3}.Release|x64.Build.0 = Release|x64
 		{C103FE39-B8E4-40A4-89D2-9DEFEA681AB3}.Release|x86.ActiveCfg = Release|Win32
 		{C103FE39-B8E4-40A4-89D2-9DEFEA681AB3}.Release|x86.Build.0 = Release|Win32
-		{A333198B-A79C-431D-83E5-6607A33AF8FB}.Debug|x64.ActiveCfg = Debug|x64
-		{A333198B-A79C-431D-83E5-6607A33AF8FB}.Debug|x64.Build.0 = Debug|x64
-		{A333198B-A79C-431D-83E5-6607A33AF8FB}.Debug|x86.ActiveCfg = Debug|Win32
-		{A333198B-A79C-431D-83E5-6607A33AF8FB}.Debug|x86.Build.0 = Debug|Win32
-		{A333198B-A79C-431D-83E5-6607A33AF8FB}.Release|x64.ActiveCfg = Release|x64
-		{A333198B-A79C-431D-83E5-6607A33AF8FB}.Release|x64.Build.0 = Release|x64
-		{A333198B-A79C-431D-83E5-6607A33AF8FB}.Release|x86.ActiveCfg = Release|Win32
-		{A333198B-A79C-431D-83E5-6607A33AF8FB}.Release|x86.Build.0 = Release|Win32
 		{4135F815-73F2-4CDC-A0C8-968244EAA716}.Debug|x64.ActiveCfg = Debug|x64
 		{4135F815-73F2-4CDC-A0C8-968244EAA716}.Debug|x64.Build.0 = Debug|x64
 		{4135F815-73F2-4CDC-A0C8-968244EAA716}.Debug|x86.ActiveCfg = Debug|Win32

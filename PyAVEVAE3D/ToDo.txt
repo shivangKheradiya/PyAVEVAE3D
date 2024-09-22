@@ -1,0 +1,2 @@
+1. Make The Repo in such a way that i can be extend using core c++ class structure.
+2. Copy the Methods From Old Projects
