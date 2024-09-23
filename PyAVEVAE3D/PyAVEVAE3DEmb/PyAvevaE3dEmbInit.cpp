@@ -3,9 +3,11 @@
 #include "PmlModule.h"
 #include "DbModule.h"
 
+
 using namespace System;
 using namespace Aveva::Core::Database;
 using namespace System::Runtime::InteropServices;
+using namespace System::Collections;
 
 typedef struct {
     PyObject_HEAD
@@ -57,12 +59,32 @@ static PyObject* PyGetPmlString(PyPmlModule* self, PyObject* args) {
     return PyUnicode_FromString(typecast::StringToCharP(self->cpp_obj->GetPmlString(typecast::CharPToString(varNameChar))));
 }
 
+static PyObject* PyGetPmlArray(PyPmlModule* self, PyObject* args) {
+    const char* varNameChar;
+    if (!PyArg_Parse(args, "s", &varNameChar)) {
+        Py_RETURN_NONE;
+    }
+
+    Hashtable^ tbl = self->cpp_obj->GetPmlArray(typecast::CharPToString(varNameChar));
+    PyObject* pyList = PyList_New(tbl->Count);
+    int i = 0;
+
+    for each (DictionaryEntry^ dataElm in tbl)
+    {
+        PyObject* attName = PyUnicode_FromString(typecast::StringToCharP(dataElm->Value->ToString()));
+        PyList_SetItem(pyList, i, attName);
+        i++;
+    }
+    return pyList;
+}
+
 static PyMethodDef PmlMethods[] = {
     {"RunInPdms", (PyCFunction)PyRunInPdms, METH_O, "Runs the PML Command in PDMS Console"},
     {"Run", (PyCFunction)PyRun, METH_O, "Runs the PML Command in .Net Environment"},
     {"GetPmlString", (PyCFunction)PyGetPmlString, METH_O, "Retuns the Value of the PML Variable as String"},
     {"GetPmlReal", (PyCFunction)PyGetPmlReal, METH_O, "Retuns the Value of the PML Variable as Long"},
     {"GetPmlBool", (PyCFunction)PyGetPmlBool, METH_O, "Retuns the Value of the PML Variable as Bool"},
+    {"GetPmlArray", (PyCFunction)PyGetPmlArray, METH_O, "Retuns the Value of the PML Variable as Array"},
     {nullptr, nullptr, 0, nullptr}
 };
 

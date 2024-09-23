@@ -1,0 +1,16 @@
+define object DataBridge
+
+endobject
+
+define method .DataBridge()
+
+endmethod
+
+define method .getArray(!variableName is string) is array
+  return !!$!variableName
+endmethod
+
+define method .setArray(!values is ANY)
+  !!p = !values
+  q var !!p
+endmethod

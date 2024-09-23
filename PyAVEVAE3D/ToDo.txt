@@ -1,4 +1,3 @@
-1. Add Code in PMLModule e.g. Array
 2. Add Code in DbModule For getting E.g. DbAttribute
 3. Copy the Methods From Old Projects
 4. Add IDLE in AVEVA for python code

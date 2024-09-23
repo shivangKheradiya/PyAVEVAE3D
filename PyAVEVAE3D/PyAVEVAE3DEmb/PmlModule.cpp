@@ -2,6 +2,8 @@
 
 namespace acuc = Aveva::Core::Utilities::CommandLine;
 using namespace acuc;
+using namespace System;
+using namespace Aveva::Core::PMLNet;
 
 bool PmlModule::RunInPdms(System::String^ command) {
     try
@@ -54,7 +56,21 @@ bool PmlModule::GetPmlBool(System::String^ variableName) {
     }
 }
 
-System::Double^ PmlModule::GetPmlReal(System::String^ variableName) {
+Hashtable^ PmlModule::GetPmlArray(System::String^ variableName) {
+    try
+    {
+        PMLNetAny^ PmlObject = PMLNetAny::createInstance("DATABRIDGE", gcnew array < System::Object^>{}, 0, true);
+        System::Object^ pmlArrayObject = gcnew Hashtable();
+        PmlObject->invokeMethod("getArray", gcnew array < System::Object^>{ variableName }, 1, pmlArrayObject , true, true);
+        return safe_cast<Hashtable^>(pmlArrayObject);
+    }
+    catch (...)
+    {
+        Console::Write("Something went wrong in PmlModule::GetPmlArray method");
+    }
+}
+
+double PmlModule::GetPmlReal(System::String^ variableName) {
     try
     {
         acuc::Command^ cmd = acuc::Command::CreateCommand("");

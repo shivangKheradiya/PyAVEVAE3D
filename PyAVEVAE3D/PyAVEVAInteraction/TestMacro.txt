@@ -21,6 +21,11 @@ Q VAR !X.METHODS()
 
 !x.RUNPYCODEINVENV(|from pyavevae3demb import PML|)
 !x.RUNPYCODEINVENV(|x = PML()|)
+!!x[1] = 1
+!!x[2] = 'ss'
+!!x[3] = 'Pqrs'
+!!x[4] = 12
+!x.RUNPYCODEINVENV(|x.GetPmlArray("x")|)
 !x.RUNPYCODEINVENV(|x.Run("/ZONE-PIPING-AREA01")|)
 
 command to invoke Jupyter Notebook:

@@ -33,6 +33,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="e3dTest.py" />
+    <None Include="DataBridge.pmlobj" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PyAvevaE3dEmbModule.h">
