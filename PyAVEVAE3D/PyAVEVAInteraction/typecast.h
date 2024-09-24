@@ -17,6 +17,5 @@ public:
 	static char* StringToCharP(System::String^ str);
 	static String^ CharPToString(const char* str);
 	static PyObject* PyUnicode_FromStr(char* charPtr);
-private:
 };
 

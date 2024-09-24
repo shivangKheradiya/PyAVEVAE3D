@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -74,8 +74,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\Shiva\AppData\Local\Programs\Python\Python310-32\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Shiva\AppData\Local\Programs\Python\Python310-32\libs;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Program Files (x86)\Python310-32\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files (x86)\Python310-32\libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -126,7 +126,6 @@
   <ItemGroup>
     <ClInclude Include="pch.h" />
     <ClInclude Include="PyAVEVAInteraction.h" />
-    <ClInclude Include="PythonConsole.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="typecast.h" />
   </ItemGroup>
@@ -139,7 +138,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="PyAVEVAInteraction.cpp" />
-    <ClCompile Include="PythonConsole.cpp" />
     <ClCompile Include="typecast.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -161,6 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="TestMacro.txt" />
+    <Text Include="RunPy.pmlfrm" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

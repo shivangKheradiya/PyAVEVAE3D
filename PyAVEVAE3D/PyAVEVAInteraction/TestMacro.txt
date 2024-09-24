@@ -3,9 +3,15 @@ import 'C:\Program Files (x86)\AVEVA\Everything3D2.10\skDlls\PyAVEVAInteraction'
 using namespace 'PyAVEVAInteraction'
 !x = object PyAVEVAInteractionObj()
 Q VAR !X.METHODS()
-!X.StartVenvPy( |C:/Program Files (x86)/AVEVA/Everything3D2.10/skDlls/pyEnv/Scripts/python.exe|)
-!x.EmbadeJupyter()
+!X.StartVenvPy( |C:/Program Files (x86)/AVEVA/Everything3D2.10/skDlls/pyAveva/Scripts/python.exe|)
 !x.RunPyFileInVenv(|C:/db/e3dTest.py|)
+
+!x.RUNPYCODEINVENV(|import idlelib.pyshell|)
+!x.RUNPYCODEINVENV(|idlelib.pyshell.main()|)
+
+!x.RUNPYCODEINVENV(|import tkinter as tk|)
+!x.RUNPYCODEINVENV(|root = tk.Tk()|)
+!x.RUNPYCODEINVENV(|root.mainloop()|)
 
 -- !x.RUNPYCODEINVENV(|import sys|)
 -- !x.RUNPYCODEINVENV(|import os|)

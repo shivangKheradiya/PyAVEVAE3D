@@ -1,0 +1,42 @@
+setup form !!runPy resize
+
+  import 'C:\Program Files (x86)\AVEVA\Everything3D2.10\skDlls\PyAVEVAInteraction'
+  handle any
+  endhandle
+  using namespace 'PyAVEVAInteraction'
+  member .PyAVEVAInteractionObj is PYAVEVAINTERACTIONOBJ
+
+  title 'Run Python'
+  textpane .pyCode anchor top + left + bottom + right at xmin ymin at x0 y0 width 40 height 20
+  path down
+  button .run anchor bottom + left 'Run pyCode' callback '!this.executePyCode()'
+  path right
+  button .clear 'Clear' anchor bottom + right at xmax form-size callback '!this.pyCode.clear()'
+
+  member .filename is STRING
+exit
+
+define method .runPy()
+  !this.filename = '%AVEVA_DESIGN_USER%\tmpPyCode.py'
+
+  !file = object FILE(!this.filename)
+  if (!file.exists()) then
+    !lines = !file.readFile()
+    !this.pyCode.val = !lines
+  endif
+
+  !this.PyAVEVAInteractionObj.StartVenvPy( |C:/Program Files (x86)/AVEVA/Everything3D2.10/skDlls/pyAveva/Scripts/python.exe|)
+
+endmethod
+
+define method .executePyCode()
+  -- get contents of text pane
+  !pyCode = !this.pyCode.val
+
+  -- output them to a file
+  !file = object FILE(!this.filename)
+  !file.writeFile('OVERWRITE', !pyCode)
+
+  -- run in the pyCode
+  !this.PyAVEVAInteractionObj.RunPyFileInVenv(|$!this.filename|)
+endmethod

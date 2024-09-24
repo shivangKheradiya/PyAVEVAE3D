@@ -21,17 +21,13 @@ namespace PyAVEVAInteraction {
 		[PMLNetCallable()]
 			void StartVenvPy(System::String^ venv_exe_path);
 		[PMLNetCallable()]
-			void RunPyFileInVenv(System::String^ filePath);
+			void StartSysPy();
 		[PMLNetCallable()]
-			void RunPyCodeInVenv(System::String^ PythonCode);
+			void RunPyFile(System::String^ filePath);
 		[PMLNetCallable()]
-			void StopVenvPy();
+			void RunPyCode(System::String^ PythonCode);
 		[PMLNetCallable()]
-			void EmbadeJupyter();
-		[PMLNetCallable()]
-			System::Double LaunchVenvCmd(System::String^ venv_exe_path);
-		[PMLNetCallable()]
-			System::String^ GetString(System::String^ message);
+			void StopPy();
 		[PMLNetCallable()]
 			void RunInSysPy();
 		[PMLNetCallable()]
@@ -45,5 +41,7 @@ namespace PyAVEVAInteraction {
 		void RunPythonFile(const char* filePath);
 		PyConfig* pyConfig;
 		PyStatus* pyStatus;
+		[PMLNetCallable()]
+			bool isEnvOpen;
 	};
 }
