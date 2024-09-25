@@ -118,7 +118,7 @@
   <ItemGroup>
     <ClCompile Include="DbModule.cpp" />
     <ClCompile Include="PmlModule.cpp" />
-    <ClCompile Include="PyAvevaE3dEmbModule.cpp" />
+    <ClCompile Include="CommonModule.cpp" />
     <ClCompile Include="PyAvevaE3dEmbInit.cpp" />
     <ClCompile Include="typecast.cpp" />
   </ItemGroup>
@@ -144,7 +144,7 @@
     <ClInclude Include="AllHeader.h" />
     <ClInclude Include="DbModule.h" />
     <ClInclude Include="PmlModule.h" />
-    <ClInclude Include="PyAvevaE3dEmbModule.h" />
+    <ClInclude Include="CommonModule.h" />
     <ClInclude Include="typecast.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,13 +1,12 @@
-import pyavevae3demb
-from pyavevae3demb import db
+from pyavevae3demb import COMMON
 
-dir(pyavevae3demb)
-print(pyavevae3demb.mdb())
-mdb = pyavevae3demb.mdb()
-print(mdb)
-ce = pyavevae3demb.get_ce()
-print(ce)
-pyavevae3demb.set_ce("/100-B-2")
+x = COMMON()
+x.ce = "/SITE-CABLE-AREA03"
+print(x.mdb())
+print(x.savework())
+print(x.getwork())
 
-att = db.attributes()
-print(att)
+
+from pyavevae3demb import DB
+d = DB()
+d.

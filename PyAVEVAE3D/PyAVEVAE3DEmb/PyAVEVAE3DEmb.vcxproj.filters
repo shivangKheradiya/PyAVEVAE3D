@@ -18,7 +18,7 @@
     <ClCompile Include="PyAvevaE3dEmbInit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PyAvevaE3dEmbModule.cpp">
+    <ClCompile Include="CommonModule.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DbModule.cpp">
@@ -36,7 +36,7 @@
     <None Include="DataBridge.pmlobj" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="PyAvevaE3dEmbModule.h">
+    <ClInclude Include="CommonModule.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DbModule.h">
