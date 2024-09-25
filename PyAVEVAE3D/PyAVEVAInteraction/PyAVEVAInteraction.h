@@ -29,12 +29,6 @@ namespace PyAVEVAInteraction {
 		[PMLNetCallable()]
 			void StopPy();
 		[PMLNetCallable()]
-			void RunInSysPy();
-		[PMLNetCallable()]
-			void LaunchVenvCmddd();
-		[PMLNetCallable()]
-			void RunInVenvPy(System::String^ venv_exe_path, System::String^ filePath);
-		[PMLNetCallable()]
 			void Assign(PyAVEVAInteractionObj that);
 		[PMLNetCallable()]
 			~PyAVEVAInteractionObj();

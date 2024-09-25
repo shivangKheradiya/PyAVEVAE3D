@@ -12,111 +12,14 @@ PyAVEVAInteractionObj::PyAVEVAInteractionObj() {
 
 PyAVEVAInteractionObj::~PyAVEVAInteractionObj() {}
 
-void PyAVEVAInteractionObj::RunInSysPy() {
-	try
-	{
-		Py_Initialize();
-
-		// Check if Python interpreter was initialized successfully
-		if (!Py_IsInitialized()) {
-			Console::WriteLine("Python initialization failed!");
-		}
-
-		Console::WriteLine("Python Execution From C++");
-		// Execute a Python script
-		PyRun_SimpleString(//"import sys\n"
-			"print('Hello from Python!')\n"
-			//"print('Python version:', sys.version)\n"
-			//"import os\nprint(os.__file__)"
-		);
-
-		Console::WriteLine("Python Execution From .Py File At C:\\db\\test.py");
-		const char* pythonFilePath = "C:\\db\\test.py";
-		PyAVEVAInteractionObj::RunPythonFile(pythonFilePath);
-	
-		// Finalize Python interpreter
-		Py_Finalize();
-
-		Console::WriteLine("Python script executed successfully.");
-	}
-	catch (...)
-	{
-		Console::WriteLine("exception something went wrong");
-	}
-}
-
-void PyAVEVAInteractionObj::LaunchVenvCmddd() {
-	try
-	{
-		wchar_t* program = Py_DecodeLocale("C:\Program Files (x86)\AVEVA\Everything3D2.10\des.exe", NULL);
-		if (program == NULL) {
-			fprintf(stderr, "Fatal error: cannot decode argv[0]\n");
-			exit(1);
-		}
-
-		Py_SetProgramName(program);  /* optional but recommended */
-		Py_Initialize();
-		PyRun_SimpleString("from time import time,ctime\n"
-			"print('Today is', ctime(time()))\n");
-		if (Py_FinalizeEx() < 0) {
-			exit(120);
-		}
-		PyMem_RawFree(program);
-	}
-	catch (...)
-	{
-		Console::WriteLine("exception something went wrong");
-	}
-}
-
-void PyAVEVAInteractionObj::RunInVenvPy(System::String^ venv_exe_path, System::String^ filePath) {
-	try
-	{
-		PyConfig pyConfig;
-		PyStatus pyStatus;
-		//const wchar_t* wch_venv_exe_path = L"C:\\Program Files (x86)\\AVEVA\\Everything3D2.10\\skDlls\\pyEnv\\Scripts\\python.exe";
-		pin_ptr<const wchar_t> wch_venv_exe_path = PtrToStringChars(venv_exe_path);
-		//auto wch_venv_exe_path = L"C:\\Program Files (x86)\\AVEVA\\Everything3D2.10\\skDlls\\pyEnv\\Scripts\\python.exe";
-
-		PyConfig_InitIsolatedConfig(&pyConfig);
-		PyConfig_SetString(&pyConfig, &pyConfig.executable, wch_venv_exe_path);
-
-		pyStatus = Py_InitializeFromConfig(&pyConfig);
-		if (PyStatus_Exception(pyStatus)) {
-			goto exception;
-		}
-
-		//if (PyStatus_Exception(pyStatus)) {
-		//	Py_ExitStatusException(pyStatus);
-		//}
-
-		PyConfig_Clear(&pyConfig);
-
-		const char* ch_py_file_path = (char*)(void*)Marshal::StringToHGlobalAnsi(filePath);
-		Console::WriteLine("Python Execution From .Py File At " + filePath->ToString());
-			//C:\\db\\test.py");
-		//const char* pythonFilePath = "C:\\db\\test.py";
-		PyAVEVAInteractionObj::RunPythonFile(ch_py_file_path);
-
-		// Finalize Python interpreter
-		Py_Finalize();
-		Console::WriteLine("Python script executed successfully.");
-		return;
-	exception:
-		PyConfig_Clear(&pyConfig);
-		if (PyStatus_IsExit(pyStatus))
-		{
-			Console::WriteLine("ExitCode :" + pyStatus.exitcode);
-		}
-		Console::WriteLine("Exception in RunInVenvPy");
-	}
-	catch (...)
-	{
-		Console::WriteLine("exception something went wrong");
-	}
-}
-
 void PyAVEVAInteractionObj::StartVenvPy(System::String^ venv_exe_path) {
+
+	if (PyAVEVAInteractionObj::isEnvOpen)
+	{
+		Console::WriteLine("Python Environment is Already Running.");
+		return;
+	}
+
 	try
 	{
 		PyConfig pyConfig;
@@ -158,6 +61,13 @@ void PyAVEVAInteractionObj::StartVenvPy(System::String^ venv_exe_path) {
 }
 
 void PyAVEVAInteractionObj::StartSysPy() {
+
+	if ( PyAVEVAInteractionObj::isEnvOpen )
+	{
+		Console::WriteLine("Python Environment is Already Running.");
+		return;
+	}
+
 	try
 	{
 		//Py_SetProgramName(L"C:\\Users\\Shiva\\miniconda3\\envs\\Py32BitEnv\\python.exe");
@@ -168,6 +78,7 @@ void PyAVEVAInteractionObj::StartSysPy() {
 		else
 		{
 			PyAVEVAInteractionObj::isEnvOpen = true;
+			Console::WriteLine("System Leval Python initialized.");
 		}
 	}
 	catch (System::Exception^ ex)  // Catch specific managed exceptions
@@ -181,6 +92,12 @@ void PyAVEVAInteractionObj::StartSysPy() {
 }
 
 void PyAVEVAInteractionObj::RunPyFile(System::String^ filePath) {
+	if (!PyAVEVAInteractionObj::isEnvOpen)
+	{
+		Console::WriteLine("Python Environment is not running to run the file " + filePath);
+		return;
+	}
+
 	try
 	{
 		PyAVEVAInteractionObj::RunPythonFile(typecast::StringToCharP(filePath));
@@ -196,6 +113,12 @@ void PyAVEVAInteractionObj::RunPyFile(System::String^ filePath) {
 }
 
 void PyAVEVAInteractionObj::RunPyCode(System::String^ PythonCode) {
+	if (!PyAVEVAInteractionObj::isEnvOpen)
+	{
+		Console::WriteLine("Python Environment is not running to run the code " + PythonCode);
+		return;
+	}
+
 	try
 	{
 		PyObject* sys = PyImport_ImportModule("sys");
@@ -230,10 +153,17 @@ void PyAVEVAInteractionObj::RunPyCode(System::String^ PythonCode) {
 }
 
 void PyAVEVAInteractionObj::StopPy() {
+	if (!PyAVEVAInteractionObj::isEnvOpen)
+	{
+		Console::WriteLine("Python Environment is not Running.");
+		return;
+	}
+
 	try
 	{
 		Py_Finalize();
 		PyAVEVAInteractionObj::isEnvOpen = false;
+		Console::WriteLine("Python Environment is Closed.");
 	}
 	catch (System::Exception^ ex)  // Catch specific managed exceptions
 	{
