@@ -22,6 +22,8 @@ public:
 	static PyObject* PyUnicode_FromStr(char* charPtr);
 	static PyObject* StringArrayToPyList(array<System::String^>^ stringArray);
 	static array<System::String^>^ GetArrayFromCollection(ACDF::DBElementCollection^ collection);
+	static System::Collections::Generic::List<System::String^>^ GetListFromDBElementCollection(ACDF::DBElementCollection^ cs_collection);
+	static array<System::String^>^ GetArrayFromArrayCollection(array<ACDF::DBElementCollection^>^ colls);
 private:
 };
 

@@ -14,7 +14,7 @@ array<System::String^>^ DbModule::attributes() {
     return attributeNames;
 }
 
-ACDF::DBElementCollection^ DbModule::CollectAllFor(System::String^ elmName) {
+ACDF::DBElementCollection^ DbModule::CollectAllForElement(System::String^ elmName) {
     return gcnew ACDF::DBElementCollection(DbElement::GetElement(elmName));
 }
 
@@ -34,27 +34,29 @@ ACDF::DBElementCollection^ DbModule::CollectAllTypeWithFilter(System::String^ el
     return gcnew ACDF::DBElementCollection(DbElement::GetElement(elmName), baseFilter);
 }
 
-ACDF::AndFilter^ DbModule::AndFilter() {
-    return gcnew ACDF::AndFilter();
+ACDF::TypeFilter^ DbModule::TypeFilter(System::String^ elementTypes) {
+    array<System::String^>^ elmTypes = elementTypes->Split(' ');
+    array<DbElementType^>^ dbElmTypes = gcnew array<DbElementType^>(elmTypes->Length);
+
+    int i = 0;
+    for each (System::String^ elementType in elmTypes)
+    {
+        dbElmTypes[i] = DbElementType::GetElementType(elementType);
+        i++;
+    }
+    return gcnew ACDF::TypeFilter(dbElmTypes);
 }
 
-ACDF::OrFilter^ DbModule::OrFilter() {
-    return gcnew ACDF::OrFilter();
-}
+array<ACDF::DBElementCollection^>^ DbModule::CollectAllTypesFor(System::String^ scopeElementNames, ACDF::TypeFilter^ typeFilter) {
+    array<System::String^>^ elmsName = scopeElementNames->Split(' ');
+    array<ACDF::DBElementCollection^>^ colls = gcnew array<ACDF::DBElementCollection^>(elmsName->Length);
+    
+    int i = 0;
+    for each (System::String ^ elmName in elmsName)
+    {
+        colls[i] = DbModule::CollectAllTypeWithFilter(elmName, typeFilter);
+        i++;
+    }
 
-ACDF::TypeFilter^ DbModule::TypeFilter() {
-    return gcnew ACDF::TypeFilter();
-}
-
-void DbModule::AddBaseFilterInOrFilter(ACDF::OrFilter^ orFilter, ACDF::BaseFilter^ baseFilter) {
-    orFilter->Add(baseFilter);
-}
-
-void DbModule::AddBaseFilterInAndFilter(ACDF::AndFilter^ andFilter, ACDF::BaseFilter^ baseFilter) {
-    andFilter->Add(baseFilter);
-}
-
-void DbModule::AddElmTypeInTypeFilter(ACDF::TypeFilter^ typeFilter, System::String^ elementTypeName ) {
-    Aveva::Core::Database::DbElementType^ elementType = DbElementType::GetElementType(elementTypeName);
-    typeFilter->Add(elementType);
+    return colls;
 }

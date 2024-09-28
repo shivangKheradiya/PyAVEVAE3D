@@ -11,4 +11,7 @@ from pyavevae3demb import DB
 d = DB()
 x = d.attributes()
 print(x)
-print(d.collectAllFor("/SITE-CABLE-AREA03"))
+print(d.collectAllForElement("/SITE-CABLE-AREA03"))
+
+
+print(d.collectAllFor( "PIPE BRAN" , "/SITE-PIPING-AREA01 /SITE-PIPING-AREA02"))

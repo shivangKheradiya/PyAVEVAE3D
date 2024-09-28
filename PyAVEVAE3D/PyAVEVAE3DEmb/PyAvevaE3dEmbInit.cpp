@@ -16,11 +16,6 @@ typedef struct {
 typedef struct {
     PyObject_HEAD
         DbModule* cpp_DbModuleObj;
-    gcroot<ACDF::TypeFilter^> typeFilter;
-    gcroot<ACDF::AttributeUnsetFilter^> attributeUnsetFilter;
-    gcroot<ACDF::AttributeRefFilter^> attributeRefFilter;
-    gcroot<ACDF::AndFilter^> andFilter;
-    gcroot<ACDF::OrFilter^> orFilter;
 } PyDbModule;
 
 typedef struct {
@@ -150,7 +145,7 @@ static PyObject* PyAttributes(PyDbModule* self) {
     Py_RETURN_NONE;
 }
 
-static PyObject* PyCollectAllFor(PyDbModule* self, PyObject* elementName) {
+static PyObject* PyCollectAllForElement(PyDbModule* self, PyObject* elementName) {
     try
     {
         const char* elementNameChar;
@@ -158,7 +153,27 @@ static PyObject* PyCollectAllFor(PyDbModule* self, PyObject* elementName) {
             Py_RETURN_NONE;
         }
 
-        return typecast::StringArrayToPyList(typecast::GetArrayFromCollection(self->cpp_DbModuleObj->CollectAllFor(typecast::CharPToString(elementNameChar))));
+        return typecast::StringArrayToPyList(typecast::GetArrayFromCollection(self->cpp_DbModuleObj->CollectAllForElement(typecast::CharPToString(elementNameChar))));
+    }
+    catch (...)
+    {
+        Console::WriteLine("Unable to fatch attributes");
+    }
+    Py_RETURN_NONE;
+}
+
+static PyObject* PyCollectAllFor(PyDbModule* self, PyObject* args) {
+    try
+    {
+        const char* elementTypes;
+        const char* elementScope;
+        if (!PyArg_ParseTuple(args, "ss", &elementTypes, &elementScope)) {
+            Py_RETURN_NONE;
+        }
+
+        TypeFilter^ typeFilter = self->cpp_DbModuleObj->TypeFilter(typecast::CharPToString(elementTypes));
+
+        return typecast::StringArrayToPyList(typecast::GetArrayFromArrayCollection(self->cpp_DbModuleObj->CollectAllTypesFor(typecast::CharPToString(elementScope), typeFilter)));
     }
     catch (...)
     {
@@ -169,7 +184,8 @@ static PyObject* PyCollectAllFor(PyDbModule* self, PyObject* elementName) {
 
 static PyMethodDef PyDbMethods[] = {
     {"attributes", (PyCFunction)PyAttributes, METH_NOARGS, "Returns Attributes on current elements."},
-    {"collectAllFor", (PyCFunction)PyCollectAllFor, METH_O, "Returns Collection as List for Element"},
+    {"collectAllForElement", (PyCFunction)PyCollectAllForElement, METH_O, "Returns Collection as List for Element"},
+    {"collectAllFor", (PyCFunction)PyCollectAllFor, METH_VARARGS, "Returns Collection as List for Element"},
     {nullptr, nullptr, 0, nullptr}
 };
 

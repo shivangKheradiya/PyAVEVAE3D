@@ -30,13 +30,28 @@ PyObject* typecast::StringArrayToPyList(array<System::String^>^ stringArray) {
 }
 
 array<System::String^>^ typecast::GetArrayFromCollection(ACDF::DBElementCollection^ cs_collection) {
+	return typecast::GetListFromDBElementCollection(cs_collection)->ToArray();
+}
 
-    System::Collections::Generic::List<System::String^>^ collection = gcnew System::Collections::Generic::List<System::String^>();
+System::Collections::Generic::List<System::String^>^ typecast::GetListFromDBElementCollection(ACDF::DBElementCollection^ cs_collection) {
 
-    for each (DbElement ^ elm in cs_collection)
-    {
+	System::Collections::Generic::List<System::String^>^ collection = gcnew System::Collections::Generic::List<System::String^>();
+
+	for each (DbElement ^ elm in cs_collection)
+	{
 		collection->Add(elm->GetAsString(DbAttributeInstance::FLNN));
-    }
+	}
 
-    return collection->ToArray();
+	return collection;
+}
+
+array<System::String^>^ typecast::GetArrayFromArrayCollection(array<ACDF::DBElementCollection^>^ colls) {
+	System::Collections::Generic::List<System::String^>^ collection = gcnew System::Collections::Generic::List<System::String^>();
+	
+	for each (ACDF::DBElementCollection ^ elmColl in colls)
+	{
+		collection->AddRange(typecast::GetListFromDBElementCollection(elmColl));
+	}
+	
+	return collection->ToArray();
 }
