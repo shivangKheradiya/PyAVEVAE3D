@@ -2,6 +2,8 @@
 
 using namespace System;
 using namespace System::Runtime::InteropServices;
+using namespace Aveva::Core::Database;
+using namespace System::Collections;
 
 char* typecast::StringToCharP(System::String^ str) {
 	return (char*)(void*)Marshal::StringToHGlobalAnsi(str);
@@ -25,4 +27,16 @@ PyObject* typecast::StringArrayToPyList(array<System::String^>^ stringArray) {
 		i++;
 	}
 	return pyList;
+}
+
+array<System::String^>^ typecast::GetArrayFromCollection(ACDF::DBElementCollection^ cs_collection) {
+
+    System::Collections::Generic::List<System::String^>^ collection = gcnew System::Collections::Generic::List<System::String^>();
+
+    for each (DbElement ^ elm in cs_collection)
+    {
+		collection->Add(elm->GetAsString(DbAttributeInstance::FLNN));
+    }
+
+    return collection->ToArray();
 }

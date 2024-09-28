@@ -3,7 +3,6 @@
 #include "DbModule.h"
 #include "CommonModule.h"
 
-
 using namespace System;
 using namespace Aveva::Core::Database;
 using namespace System::Runtime::InteropServices;
@@ -11,17 +10,22 @@ using namespace System::Collections;
 
 typedef struct {
     PyObject_HEAD
-        PmlModule* cpp_obj;
+        PmlModule* cpp_PmlModuleObj;
 } PyPmlModule;
 
 typedef struct {
     PyObject_HEAD
-        DbModule* cpp_obj;
+        DbModule* cpp_DbModuleObj;
+    gcroot<ACDF::TypeFilter^> typeFilter;
+    gcroot<ACDF::AttributeUnsetFilter^> attributeUnsetFilter;
+    gcroot<ACDF::AttributeRefFilter^> attributeRefFilter;
+    gcroot<ACDF::AndFilter^> andFilter;
+    gcroot<ACDF::OrFilter^> orFilter;
 } PyDbModule;
 
 typedef struct {
     PyObject_HEAD
-        CommonModule* cpp_obj;
+        CommonModule* cpp_CommonModuleObj;
 } PyCommonModule;
 
 static PyObject* PyRunInPdms(PyPmlModule* self, PyObject* args) {
@@ -29,7 +33,7 @@ static PyObject* PyRunInPdms(PyPmlModule* self, PyObject* args) {
     if (!PyArg_Parse(args, "s", &commandChar)) {
         Py_RETURN_NONE;
     }
-    return PyBool_FromLong(self->cpp_obj->RunInPdms(typecast::CharPToString(commandChar)));
+    return PyBool_FromLong(self->cpp_PmlModuleObj->RunInPdms(typecast::CharPToString(commandChar)));
 }
 
 static PyObject* PyRun(PyPmlModule* self, PyObject* args) {
@@ -37,7 +41,7 @@ static PyObject* PyRun(PyPmlModule* self, PyObject* args) {
     if (!PyArg_Parse(args, "s", &commandChar)) {
         Py_RETURN_NONE;
     }
-    return PyBool_FromLong(self->cpp_obj->Run(typecast::CharPToString(commandChar)));
+    return PyBool_FromLong(self->cpp_PmlModuleObj->Run(typecast::CharPToString(commandChar)));
 }
 
 static PyObject* PyGetPmlBool(PyPmlModule* self, PyObject* args) {
@@ -45,7 +49,7 @@ static PyObject* PyGetPmlBool(PyPmlModule* self, PyObject* args) {
     if (!PyArg_Parse(args, "s", &varNameChar)) {
         Py_RETURN_NONE;
     }
-    return PyBool_FromLong(self->cpp_obj->GetPmlBool(typecast::CharPToString(varNameChar)));
+    return PyBool_FromLong(self->cpp_PmlModuleObj->GetPmlBool(typecast::CharPToString(varNameChar)));
 }
 
 static PyObject* PyGetPmlReal(PyPmlModule* self, PyObject* args) {
@@ -53,7 +57,7 @@ static PyObject* PyGetPmlReal(PyPmlModule* self, PyObject* args) {
     if (!PyArg_Parse(args, "s", &varNameChar)) {
         Py_RETURN_NONE;
     }
-    return PyFloat_FromDouble((double)self->cpp_obj->GetPmlReal(typecast::CharPToString(varNameChar)));
+    return PyFloat_FromDouble((double)self->cpp_PmlModuleObj->GetPmlReal(typecast::CharPToString(varNameChar)));
 }
 
 static PyObject* PyGetPmlString(PyPmlModule* self, PyObject* args) {
@@ -61,7 +65,7 @@ static PyObject* PyGetPmlString(PyPmlModule* self, PyObject* args) {
     if (!PyArg_Parse(args, "s", &varNameChar)) {
         Py_RETURN_NONE;
     }
-    return PyUnicode_FromString(typecast::StringToCharP(self->cpp_obj->GetPmlString(typecast::CharPToString(varNameChar))));
+    return PyUnicode_FromString(typecast::StringToCharP(self->cpp_PmlModuleObj->GetPmlString(typecast::CharPToString(varNameChar))));
 }
 
 static PyObject* PyGetPmlArray(PyPmlModule* self, PyObject* args) {
@@ -70,7 +74,7 @@ static PyObject* PyGetPmlArray(PyPmlModule* self, PyObject* args) {
         Py_RETURN_NONE;
     }
 
-    Hashtable^ tbl = self->cpp_obj->GetPmlArray(typecast::CharPToString(varNameChar));
+    Hashtable^ tbl = self->cpp_PmlModuleObj->GetPmlArray(typecast::CharPToString(varNameChar));
     PyObject* pyList = PyList_New(tbl->Count);
     int i = 0;
 
@@ -137,7 +141,24 @@ static PyTypeObject PyPmlModuleType = {
 static PyObject* PyAttributes(PyDbModule* self) {
     try
     {
-        return typecast::StringArrayToPyList(self->cpp_obj->attributes());
+        return typecast::StringArrayToPyList(self->cpp_DbModuleObj->attributes());
+    }
+    catch (...)
+    {
+        Console::WriteLine("Unable to fatch attributes");
+    }
+    Py_RETURN_NONE;
+}
+
+static PyObject* PyCollectAllFor(PyDbModule* self, PyObject* elementName) {
+    try
+    {
+        const char* elementNameChar;
+        if (!PyArg_Parse(elementName, "s", &elementNameChar)) {
+            Py_RETURN_NONE;
+        }
+
+        return typecast::StringArrayToPyList(typecast::GetArrayFromCollection(self->cpp_DbModuleObj->CollectAllFor(typecast::CharPToString(elementNameChar))));
     }
     catch (...)
     {
@@ -148,6 +169,7 @@ static PyObject* PyAttributes(PyDbModule* self) {
 
 static PyMethodDef PyDbMethods[] = {
     {"attributes", (PyCFunction)PyAttributes, METH_NOARGS, "Returns Attributes on current elements."},
+    {"collectAllFor", (PyCFunction)PyCollectAllFor, METH_O, "Returns Collection as List for Element"},
     {nullptr, nullptr, 0, nullptr}
 };
 
@@ -194,16 +216,16 @@ static PyTypeObject PyDbModuleType = {
 };
 
 static PyObject* PyMdb(PyCommonModule* self) {
-    return PyUnicode_FromString(typecast::StringToCharP(self->cpp_obj->mdb()));
+    return PyUnicode_FromString(typecast::StringToCharP(self->cpp_CommonModuleObj->mdb()));
 }
 
 static PyObject* PySaveWork(PyCommonModule* self) {
-    self->cpp_obj->SaveWork();
+    self->cpp_CommonModuleObj->SaveWork();
     Py_RETURN_NONE;
 }
 
 static PyObject* PyGetWork(PyCommonModule* self) {
-    self->cpp_obj->GetWork();
+    self->cpp_CommonModuleObj->GetWork();
     Py_RETURN_NONE;
 }
 
@@ -215,7 +237,7 @@ static PyMethodDef PyCommonMethods[] = {
 };
 
 static PyObject* PyCommonModule_getce(PyCommonModule* self, void* closure) {
-    return PyUnicode_FromString(typecast::StringToCharP(self->cpp_obj->getce()));
+    return PyUnicode_FromString(typecast::StringToCharP(self->cpp_CommonModuleObj->getce()));
 }
 
 static int PyCommonModule_setce(PyCommonModule* self, PyObject* value, void* closure) {
@@ -223,7 +245,7 @@ static int PyCommonModule_setce(PyCommonModule* self, PyObject* value, void* clo
         PyErr_SetString(PyExc_TypeError, "The CE Element must be a string.");
         return -1;
     }
-    self->cpp_obj->setce(typecast::CharPToString(PyUnicode_AsUTF8(value)));
+    self->cpp_CommonModuleObj->setce(typecast::CharPToString(PyUnicode_AsUTF8(value)));
     return 0;
 }
 

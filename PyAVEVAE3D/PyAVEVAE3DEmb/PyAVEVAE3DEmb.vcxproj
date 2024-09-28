@@ -127,6 +127,10 @@
       <HintPath>..\..\..\..\Program Files (x86)\AVEVA\Everything3D2.10\Aveva.Core.Database.dll</HintPath>
       <Private>false</Private>
     </Reference>
+    <Reference Include="Aveva.Core.Database.Filters">
+      <HintPath>..\..\..\..\Program Files (x86)\AVEVA\Everything3D2.10\Aveva.Core.Database.Filters.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
     <Reference Include="Aveva.Core.Utilities">
       <HintPath>..\..\..\..\Program Files (x86)\AVEVA\Everything3D2.10\Aveva.Core.Utilities.dll</HintPath>
       <Private>false</Private>

@@ -9,4 +9,6 @@ print(x.getwork())
 
 from pyavevae3demb import DB
 d = DB()
-d.
+x = d.attributes()
+print(x)
+print(d.collectAllFor("/SITE-CABLE-AREA03"))

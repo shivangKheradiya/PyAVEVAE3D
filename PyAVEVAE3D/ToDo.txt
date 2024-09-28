@@ -1,2 +1,1 @@
-2. Add Code in DbModule For getting E.g. DbAttribute
-3. Copy the Methods From Old Projects
+Copy the Methods From Old Projects
