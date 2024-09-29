@@ -182,10 +182,52 @@ static PyObject* PyCollectAllFor(PyDbModule* self, PyObject* args) {
     Py_RETURN_NONE;
 }
 
+static PyObject* PySetStringAttribute(PyDbModule* self, PyObject* args) {
+    const char* elementName;
+    const char* attName;
+    const char* attValue;
+
+    if (!PyArg_ParseTuple(args, "sss", &elementName, &attName, &attValue)) {
+        Py_RETURN_NONE;
+    }
+    self->cpp_DbModuleObj->SetStringAttribute(typecast::CharPToString(elementName), typecast::CharPToString(attName), typecast::CharPToString(attValue));
+    Py_RETURN_NONE;
+}
+
+static PyObject* PySetRealAttribute(PyDbModule* self, PyObject* args) {
+    const char* elementName;
+    const char* attName;
+    int attValue;
+
+    if (!PyArg_ParseTuple(args, "ssi", &elementName, &attName, &attValue)) {
+        Py_RETURN_NONE;
+    }
+    self->cpp_DbModuleObj->SetRealAttribute(typecast::CharPToString(elementName), typecast::CharPToString(attName), attValue);
+    Py_RETURN_NONE;
+}
+
+static PyObject* PySetBoolAttribute(PyDbModule* self, PyObject* args) {
+    const char* elementName;
+    const char* attName;
+    int attValue;
+
+    if (!PyArg_ParseTuple(args, "ssi", &elementName, &attName, &attValue)) {
+        Py_RETURN_NONE;
+    }
+
+    bool boolValue = (attValue != 0);
+
+    self->cpp_DbModuleObj->SetBoolAttribute(typecast::CharPToString(elementName), typecast::CharPToString(attName), boolValue);
+    Py_RETURN_NONE;
+}
+
 static PyMethodDef PyDbMethods[] = {
     {"attributes", (PyCFunction)PyAttributes, METH_NOARGS, "Returns Attributes on current elements."},
     {"collectAllForElement", (PyCFunction)PyCollectAllForElement, METH_O, "Returns Collection as List for Element"},
     {"collectAllFor", (PyCFunction)PyCollectAllFor, METH_VARARGS, "Returns Collection as List for Element"},
+    {"SetStringAttribute", (PyCFunction)PySetStringAttribute, METH_VARARGS, "Sets String Attribute for Element"},
+    {"SetRealAttribute", (PyCFunction)PySetRealAttribute, METH_VARARGS, "Sets Real Attribute for Element"},
+    {"SetBoolAttribute", (PyCFunction)PySetBoolAttribute, METH_VARARGS, "Sets Bool Attribute for Element"},
     {nullptr, nullptr, 0, nullptr}
 };
 

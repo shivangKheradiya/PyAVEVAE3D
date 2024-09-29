@@ -17,4 +17,7 @@ public:
 	ACDF::TypeFilter^ TypeFilter(System::String^ elementTypes);
 	ACDF::DBElementCollection^ CollectAllTypeWithFilter(System::String^ elmName, ACDF::BaseFilter^ baseFilter);
 	array<ACDF::DBElementCollection^>^ CollectAllTypesFor(System::String^ scopeElementNames, ACDF::TypeFilter^ typeFilter);
+	void SetStringAttribute(System::String^ elmName, System::String^ attName, System::String^ attValue);
+	void SetRealAttribute(System::String^ elmName, System::String^ attName, double attValue);
+	void SetBoolAttribute(System::String^ elmName, System::String^ attName, bool attValue);
 };

@@ -1,4 +1,5 @@
 #include "DbModule.h"
+
 using namespace Aveva::Core::Database;
 using namespace System;
 
@@ -59,4 +60,33 @@ array<ACDF::DBElementCollection^>^ DbModule::CollectAllTypesFor(System::String^ 
     }
 
     return colls;
+}
+
+void DbModule::SetStringAttribute(System::String^ elmName, System::String^ attName, System::String^ attValue) {
+    DbElement^ elm = DbElement::GetElement(elmName);
+    DbAttribute^ att = DbAttribute::GetDbAttribute(attName);
+    elm->SetAttribute(att, attValue);
+}
+
+void DbModule::SetBoolAttribute(System::String^ elmName, System::String^ attName, bool attValue) {
+    DbElement^ elm = DbElement::GetElement(elmName);
+    DbAttribute^ att = DbAttribute::GetDbAttribute(attName);
+    elm->SetAttribute(att, attValue);
+}
+
+void DbModule::SetRealAttribute(System::String^ elmName, System::String^ attName, double attValue) {
+    DbElement^ elm = DbElement::GetElement(elmName);
+    DbAttribute^ att = DbAttribute::GetDbAttribute(attName);
+    try
+    {
+        elm->SetAttribute(att, attValue);
+    }
+    catch (System::Exception^ ex)
+    {
+        elm->SetAttribute(att, (int)attValue);
+    }
+    catch (...)
+    {
+        Console::WriteLine("Attribute : "+ attName + " can't assign value :" + attValue);
+    }
 }
