@@ -24,9 +24,6 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="typecast.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PyAVEVAInteraction.cpp">
@@ -54,5 +51,6 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="TestMacro.txt" />
+    <Text Include="RunPy.pmlfrm" />
   </ItemGroup>
 </Project>

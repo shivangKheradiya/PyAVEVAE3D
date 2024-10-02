@@ -1,4 +1,4 @@
-#include "typecast.h"
+#include "AvevaWraperClassDefinations.h"
 
 using namespace System;
 using namespace System::Runtime::InteropServices;

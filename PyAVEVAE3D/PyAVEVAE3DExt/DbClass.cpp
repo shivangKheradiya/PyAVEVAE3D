@@ -1,9 +1,9 @@
-#include "DbModule.h"
+#include "AvevaWraperClassDefinations.h"
 
 using namespace Aveva::Core::Database;
 using namespace System;
 
-array<System::String^>^ DbModule::attributes() {
+array<System::String^>^ DbClass::attributes() {
     array<DbAttribute^>^ atts = CurrentElement::Element->GetAttributes();
     array<System::String^>^ attributeNames = gcnew array<System::String^>(atts->Length);
     int i = 0;
@@ -15,27 +15,27 @@ array<System::String^>^ DbModule::attributes() {
     return attributeNames;
 }
 
-ACDF::DBElementCollection^ DbModule::CollectAllForElement(System::String^ elmName) {
+ACDF::DBElementCollection^ DbClass::CollectAllForElement(System::String^ elmName) {
     return gcnew ACDF::DBElementCollection(DbElement::GetElement(elmName));
 }
 
-ACDF::DBElementCollection^ DbModule::CollectAllTypeFor(System::String^ elmName, System::String^ elmType) {
+ACDF::DBElementCollection^ DbClass::CollectAllTypeFor(System::String^ elmName, System::String^ elmType) {
     return gcnew ACDF::DBElementCollection(DbElement::GetElement(elmName), gcnew ACDF::TypeFilter(DbElementType::GetElementType(elmType)));
 }
 
-ACDF::DBElementCollection^ DbModule::CollectAllTypeWithUnsetAttFor(System::String^ elmName, System::String^ attributName) {
+ACDF::DBElementCollection^ DbClass::CollectAllTypeWithUnsetAttFor(System::String^ elmName, System::String^ attributName) {
     return gcnew ACDF::DBElementCollection(DbElement::GetElement(elmName), gcnew ACDF::AttributeUnsetFilter(DbAttribute::GetDbAttribute(attributName)));
 }
 
-ACDF::DBElementCollection^ DbModule::CollectAllTypeWithAttRefFor(System::String^ elmName, System::String^ attributName, System::String^ attRefElmName) {
+ACDF::DBElementCollection^ DbClass::CollectAllTypeWithAttRefFor(System::String^ elmName, System::String^ attributName, System::String^ attRefElmName) {
     return gcnew ACDF::DBElementCollection(DbElement::GetElement(elmName), gcnew ACDF::AttributeRefFilter(DbAttribute::GetDbAttribute(attributName), DbElement::GetElement(attRefElmName)));
 }
 
-ACDF::DBElementCollection^ DbModule::CollectAllTypeWithFilter(System::String^ elmName, ACDF::BaseFilter^ baseFilter) {
+ACDF::DBElementCollection^ DbClass::CollectAllTypeWithFilter(System::String^ elmName, ACDF::BaseFilter^ baseFilter) {
     return gcnew ACDF::DBElementCollection(DbElement::GetElement(elmName), baseFilter);
 }
 
-ACDF::TypeFilter^ DbModule::TypeFilter(System::String^ elementTypes) {
+ACDF::TypeFilter^ DbClass::TypeFilter(System::String^ elementTypes) {
     array<System::String^>^ elmTypes = elementTypes->Split(' ');
     array<DbElementType^>^ dbElmTypes = gcnew array<DbElementType^>(elmTypes->Length);
 
@@ -48,33 +48,33 @@ ACDF::TypeFilter^ DbModule::TypeFilter(System::String^ elementTypes) {
     return gcnew ACDF::TypeFilter(dbElmTypes);
 }
 
-array<ACDF::DBElementCollection^>^ DbModule::CollectAllTypesFor(System::String^ scopeElementNames, ACDF::TypeFilter^ typeFilter) {
+array<ACDF::DBElementCollection^>^ DbClass::CollectAllTypesFor(System::String^ scopeElementNames, ACDF::TypeFilter^ typeFilter) {
     array<System::String^>^ elmsName = scopeElementNames->Split(' ');
     array<ACDF::DBElementCollection^>^ colls = gcnew array<ACDF::DBElementCollection^>(elmsName->Length);
     
     int i = 0;
     for each (System::String ^ elmName in elmsName)
     {
-        colls[i] = DbModule::CollectAllTypeWithFilter(elmName, typeFilter);
+        colls[i] = DbClass::CollectAllTypeWithFilter(elmName, typeFilter);
         i++;
     }
 
     return colls;
 }
 
-void DbModule::SetStringAttribute(System::String^ elmName, System::String^ attName, System::String^ attValue) {
+void DbClass::SetStringAttribute(System::String^ elmName, System::String^ attName, System::String^ attValue) {
     DbElement^ elm = DbElement::GetElement(elmName);
     DbAttribute^ att = DbAttribute::GetDbAttribute(attName);
     elm->SetAttribute(att, attValue);
 }
 
-void DbModule::SetBoolAttribute(System::String^ elmName, System::String^ attName, bool attValue) {
+void DbClass::SetBoolAttribute(System::String^ elmName, System::String^ attName, bool attValue) {
     DbElement^ elm = DbElement::GetElement(elmName);
     DbAttribute^ att = DbAttribute::GetDbAttribute(attName);
     elm->SetAttribute(att, attValue);
 }
 
-void DbModule::SetRealAttribute(System::String^ elmName, System::String^ attName, double attValue) {
+void DbClass::SetRealAttribute(System::String^ elmName, System::String^ attName, double attValue) {
     DbElement^ elm = DbElement::GetElement(elmName);
     DbAttribute^ att = DbAttribute::GetDbAttribute(attName);
     try
@@ -83,7 +83,9 @@ void DbModule::SetRealAttribute(System::String^ elmName, System::String^ attName
     }
     catch (System::Exception^ ex)
     {
+        Console::WriteLine("Attribute : " + attName + " can't assign double value :" + attValue);
         elm->SetAttribute(att, (int)attValue);
+        Console::WriteLine("Attribute : " + attName + " assigned int value :" + attValue);
     }
     catch (...)
     {

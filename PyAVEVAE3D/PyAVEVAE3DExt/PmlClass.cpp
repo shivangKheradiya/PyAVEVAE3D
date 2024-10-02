@@ -1,11 +1,11 @@
-#include "PmlModule.h"
+#include "AvevaWraperClassDefinations.h"
 
 namespace acuc = Aveva::Core::Utilities::CommandLine;
 using namespace acuc;
 using namespace System;
 using namespace Aveva::Core::PMLNet;
 
-bool PmlModule::RunInPdms(System::String^ command) {
+bool PmlClass::RunInPdms(System::String^ command) {
     try
     {
         acuc::Command^ cmd = acuc::Command::CreateCommand(command);
@@ -18,7 +18,7 @@ bool PmlModule::RunInPdms(System::String^ command) {
     return false;
 }
 
-bool PmlModule::Run(System::String^ command) {
+bool PmlClass::Run(System::String^ command) {
     try
     {
         acuc::Command^ cmd = acuc::Command::CreateCommand(command);
@@ -31,7 +31,7 @@ bool PmlModule::Run(System::String^ command) {
     return false;
 }
 
-System::String^ PmlModule::GetPmlString(System::String^ variableName) {
+System::String^ PmlClass::GetPmlString(System::String^ variableName) {
     try
     {
         acuc::Command^ cmd = acuc::Command::CreateCommand("");
@@ -44,7 +44,7 @@ System::String^ PmlModule::GetPmlString(System::String^ variableName) {
     return System::String::Empty;
 }
 
-bool PmlModule::GetPmlBool(System::String^ variableName) {
+bool PmlClass::GetPmlBool(System::String^ variableName) {
     try
     {
         acuc::Command^ cmd = acuc::Command::CreateCommand("");
@@ -56,7 +56,7 @@ bool PmlModule::GetPmlBool(System::String^ variableName) {
     }
 }
 
-Hashtable^ PmlModule::GetPmlArray(System::String^ variableName) {
+Hashtable^ PmlClass::GetPmlArray(System::String^ variableName) {
     try
     {
         PMLNetAny^ PmlObject = PMLNetAny::createInstance("DATABRIDGE", gcnew array < System::Object^>{}, 0, true);
@@ -70,7 +70,7 @@ Hashtable^ PmlModule::GetPmlArray(System::String^ variableName) {
     }
 }
 
-double PmlModule::GetPmlReal(System::String^ variableName) {
+double PmlClass::GetPmlReal(System::String^ variableName) {
     try
     {
         acuc::Command^ cmd = acuc::Command::CreateCommand("");

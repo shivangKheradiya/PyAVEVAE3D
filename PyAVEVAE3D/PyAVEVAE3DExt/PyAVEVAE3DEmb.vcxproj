@@ -23,8 +23,9 @@
     <ProjectGuid>{4135F815-73F2-4CDC-A0C8-968244EAA716}</ProjectGuid>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <Keyword>ManagedCProj</Keyword>
-    <RootNamespace>PyAVEVAE3DEmb</RootNamespace>
+    <RootNamespace>PyAVEVAE3DExt</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>PyAVEVAE3DExt</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -77,7 +78,7 @@
     <IncludePath>C:\Program Files (x86)\Python310-32\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Program Files (x86)\Python310-32\libs;$(LibraryPath)</LibraryPath>
     <TargetExt>.pyd</TargetExt>
-    <TargetName>pyavevae3demb</TargetName>
+    <TargetName>pyavevae3dext</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -116,11 +117,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DbModule.cpp" />
-    <ClCompile Include="PmlModule.cpp" />
+    <ClCompile Include="DbClass.cpp" />
+    <ClCompile Include="PmlClass.cpp" />
     <ClCompile Include="CommonModule.cpp" />
-    <ClCompile Include="PyAvevaE3dEmbInit.cpp" />
-    <ClCompile Include="typecast.cpp" />
+    <ClCompile Include="PyAvevaE3dExtInit.cpp" />
+    <ClCompile Include="typecastClass.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Aveva.Core.Database">
@@ -154,10 +155,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AllHeader.h" />
-    <ClInclude Include="DbModule.h" />
-    <ClInclude Include="PmlModule.h" />
-    <ClInclude Include="CommonModule.h" />
-    <ClInclude Include="typecast.h" />
+    <ClInclude Include="AvevaWraperClassDefinations.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

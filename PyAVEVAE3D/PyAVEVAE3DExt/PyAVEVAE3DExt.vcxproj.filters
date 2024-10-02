@@ -15,19 +15,19 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="PyAvevaE3dEmbInit.cpp">
+    <ClCompile Include="PyAvevaE3dExtInit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CommonModule.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DbModule.cpp">
+    <ClCompile Include="DbClass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PmlModule.cpp">
+    <ClCompile Include="PmlClass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="typecast.cpp">
+    <ClCompile Include="typecastClass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -36,19 +36,10 @@
     <None Include="DataBridge.pmlobj" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CommonModule.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DbModule.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PmlModule.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="AllHeader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="typecast.h">
+    <ClInclude Include="AvevaWraperClassDefinations.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

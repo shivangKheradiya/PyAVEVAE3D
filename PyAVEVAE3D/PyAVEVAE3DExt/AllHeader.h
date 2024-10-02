@@ -1,9 +1,9 @@
 #pragma once
 #include <Windows.h>
 #include <vcclr.h>
-#include "typecast.h"
 #include <vector>
 #include <cmath>
+#include <string>
 
 #ifdef _DEBUG
 #undef _DEBUG
