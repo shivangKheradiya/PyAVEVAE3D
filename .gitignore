@@ -34,6 +34,11 @@ bld/
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
+.venv/
+.vscode/
+build/
+dist/
+pyavevae3dext.egg-info/
 # Uncomment if you have tasks that create the project's static files in wwwroot
 #wwwroot/
 

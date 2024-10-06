@@ -33,15 +33,143 @@ This repository has Visual Studio Project Solution. The Solution contains 2 main
 
     To : ```%AVEVA_DESIGN_EXE%```
 
-4. copy pyd file or use pip install
+4. Install pyavevae3dext
+
+    -- Method 1: using ```pip install pyavevae3dext```.
+    
+    -- Method 2: Build the .pyd file based on the your module dependencies and build the package. [Refer Development Documetation Section](./Documentation/Development_Enviroment.md)
 
 5. Open RunPy form using pml command ```Show !!RunPy```. RunPy Form is used to write/ test python scripts.
 
 6. Run Python Script form the Form. And All the output from python scripts will be printed in the AVEVA console. e.g. ```print("abc")``` in python will give the output in the python console.
 
+## More information on pyavevae3dext PiPy Package.
+
+pyavevae3dext PiPy package has basically 3 classes.
+
+1. COMMON:
+
+    Common Class Instentiation,
+    ```python
+    c = COMMON()
+    ```
+
+    Method to know about current mdb.
+    ```python
+    c.mdb()
+    ```
+
+    Method to execute Savework command.
+    ```python
+    c.savework()
+    ```
+
+    Method to execute Getwork command.
+    ```python
+    c.getwork()
+    ```
+    Getter-Setter for ```CE```,
+    ```python
+    print(c.ce()) #Getter
+    c.ce = "/ElementName" #Setter
+    ```
+
+2. DB:
+
+    Db Class Instentiation,
+    ```python
+    d = DB()
+    ```
+
+    Method to know Attributes on current elements,
+    ```python
+    att = d.attributes()
+    print(att)
+    ```
+
+    Method to Get Collection as List for the Element,
+    ```python
+    elms = d.collectAllForElement("/SITE-CABLE-AREA03")
+    print(elms)
+    ```
+
+    Method to Get Collection as List for the Element,
+    ```python
+    elms = d.collectAllFor("PIPE BRAN", "/SITE-PIPING-AREA01 /SITE-PIPING-AREA02")
+    print(elms)
+    ```
+
+    Method to Set String Attribute for Element,
+    ```python
+    d.SetStringAttribute("/SITE-PIPING-AREA03", "Description",  "This is test description")
+    ```
+
+    Method to Set Real Attribute for Element,
+    ```python
+    d.SetRealAttribute("/SITE-PIPING-AREA03", "Number", 5)
+    ```
+
+    Method to Set Bool Attribute for Element,
+    ```python
+    d.SetBoolAttribute("/SITE-PIPING-AREA03", "Lock", True)
+    ```
+
+3. PML:
+
+    PML Class Instentiation,
+    ```python
+    p = PML()
+    ```
+
+    Method to Run the PML Command in PDMS Console,
+    ```python
+    p.RunInPdms("$p This Message is From Python...")
+    ```
+
+    Method to Run the PML Command in .Net Environment,
+    ```python
+    p.Run("/SITE-CABLE-AREA03") # /SITE-CABLE-AREA03 will be set as current element 
+    ```
+
+    To utilize the methods mentioned below, the variables in the PML Commandline must be defined as global variable.
+
+    Run the below code in PML Commandline to define the pml global variable,
+    ```
+    !!AR[1] = 'A'
+    !!AR[2] = 'b1'
+    !!AR[3] = 'C'
+    !BOOL = true
+    !REAL = 5
+    !STR = |Hii.. This message is From PML.|
+    ```
+
+    Method to get the Value of the PML Variable as String,
+    ```python
+    value = p.GetPmlString("STR")
+    print(value)
+    ```
+    
+    Method to get the Value of the PML Variable as Long,
+    ```python
+    value = p.GetPmlReal("REAL")
+    print(value)
+    ```
+
+    Method to get the Value of the PML Variable as Bool,
+    ```python
+    value = p.GetPmlBool("BOOL")
+    print(value)
+    ```
+
+    Method to get the Value of the PML Variable as Array/ List,
+    ```python
+    value = p.GetPmlArray("AR")
+    print(value)
+    ```
+
 ## Procedure For Setting Up Development Enviroment
 
-Refer the documetation Section for Detailed Procedure for setting up development environment.
+Refer the [Development Documetation Section](Documentation/Development_Enviroment.md) for Detailed Procedure for setting up development environment.
 
 ## General Guideline
 
