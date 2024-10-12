@@ -4,7 +4,8 @@ PyAVEVAE3D contains Proof of Concept for Python 3 embedding into AVEVA Plant Des
 
 This repository has Visual Studio Project Solution. The Solution contains 2 main projects:
 
-- **PyAVEVAInteraction :** It contains the architectural skeleton for Python Embading into AVEVA E3D2.1.0.3. and It invoks the either system level python or virtual enviroment python.
+- **PyAVEVAInteraction :** It contains the architectural skeleton for Python Embadding into AVEVA E3D2.1.0.3. and It invoks the either system level python or virtual enviroment python.
+
 - **PyAVEVAE3DExt :** It's Python extension module. It contains the c++ & python classes which allows python to directly interact with the AVEVA E3D.
 
 ## Build Environment Information
@@ -27,7 +28,7 @@ This repository has Visual Studio Project Solution. The Solution contains 2 main
     !!pyVenv = |path to virtual environment/Scripts/python.exe|
     ```
 
-3. Copy Dll files from solution to Aveva Installation Directory.
+3. Copy Dll files from repository to Aveva Installation Directory.
 
     From : ```..\PyAVEVAE3D\SampleDlls\PyAVEVAInteraction.dll```
 
@@ -39,7 +40,7 @@ This repository has Visual Studio Project Solution. The Solution contains 2 main
     
     -- Method 2: Build the .pyd file based on the your module dependencies and build the package. [Refer Development Documetation Section](./Documentation/Development_Enviroment.md)
 
-5. Open RunPy form using pml command ```Show !!RunPy```. RunPy Form is used to write/ test python scripts.
+5. Open RunPy form using pml command ```Show !!RunPy```. RunPy Form is used to write a test python scripts.
 
 6. Run Python Script form the Form. And All the output from python scripts will be printed in the AVEVA console. e.g. ```print("abc")``` in python will give the output in the python console.
 
