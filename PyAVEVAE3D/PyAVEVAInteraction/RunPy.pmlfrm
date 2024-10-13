@@ -19,7 +19,7 @@ exit
 
 define method .runPy()
 
-  import 'C:\Program Files (x86)\AVEVA\Everything3D2.10\skDlls\PyAVEVAInteraction'
+  import 'PyAVEVAInteraction'
   handle any
   endhandle
   using namespace 'PyAVEVAInteraction'
@@ -49,7 +49,11 @@ define method .executePyCode()
 endmethod
 
 define method .StarVenv()
-  !!PyAVEVAInteractionObj.StartVenvPy( |C:/Program Files (x86)/AVEVA/Everything3D2.10/skDlls/pyAveva/Scripts/python.exe|)
+  if ( undefined( !!pyVenv ) ) then
+    !!alert.message(|Python Virtul Environment Cound not started. Please Define !!pyVenv.|)
+  else
+    !!PyAVEVAInteractionObj.StartVenvPy( !!pyVenv )
+  endif
 endmethod
 
 define method .StopEnv()

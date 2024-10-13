@@ -52,6 +52,7 @@ pyavevae3dext PiPy package has basically 3 classes.
 
     Common Class Instentiation,
     ```python
+    from pyavevae3dext import *
     c = COMMON()
     ```
 
@@ -69,6 +70,7 @@ pyavevae3dext PiPy package has basically 3 classes.
     ```python
     c.getwork()
     ```
+    
     Getter-Setter for ```CE```,
     ```python
     print(c.ce()) #Getter
@@ -79,6 +81,7 @@ pyavevae3dext PiPy package has basically 3 classes.
 
     Db Class Instentiation,
     ```python
+    from pyavevae3dext import *
     d = DB()
     ```
 
@@ -119,6 +122,7 @@ pyavevae3dext PiPy package has basically 3 classes.
 
     PML Class Instentiation,
     ```python
+    from pyavevae3dext import *
     p = PML()
     ```
 

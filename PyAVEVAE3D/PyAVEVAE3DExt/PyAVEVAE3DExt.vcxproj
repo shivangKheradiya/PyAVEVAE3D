@@ -36,8 +36,8 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CLRSupport>true</CLRSupport>
     <CharacterSet>Unicode</CharacterSet>
@@ -79,6 +79,12 @@
     <LibraryPath>C:\Program Files (x86)\Python310-32\libs;$(LibraryPath)</LibraryPath>
     <TargetExt>.pyd</TargetExt>
     <TargetName>pyavevae3dext</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <TargetName>pyavevae3dext</TargetName>
+    <IncludePath>C:\Program Files (x86)\Python310-32\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files (x86)\Python310-32\libs;$(LibraryPath)</LibraryPath>
+    <TargetExt>.pyd</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -151,7 +157,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="DataBridge.pmlobj" />
-    <None Include="e3dTest.py" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AllHeader.h" />

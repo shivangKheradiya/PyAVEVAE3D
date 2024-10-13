@@ -50,7 +50,6 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="TestMacro.txt" />
     <Text Include="RunPy.pmlfrm" />
   </ItemGroup>
 </Project>

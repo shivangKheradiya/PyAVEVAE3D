@@ -38,5 +38,29 @@
 
 6. If you are planning to use TCL/TK, The following paths are required to be added into the enviroment.
 
-    - ```set TCL_LIBRARY=C:\Program Files (x86)\Python310-32\tcl\tcl8.6```
-    - ```set TK_LIBRARY=C:\Program Files (x86)\Python310-32\tcl\tk8.6```
+    - ```set TCL_LIBRARY=Path to Python Installation Directory\tcl\tcl8.6```
+    - ```set TK_LIBRARY=Path to Python Installation Directory\tcl\tk8.6```
+
+## Procedure to Build the Wheel Python Package
+
+1. Build [PyAVEVAE3DExt project](../PyAVEVAE3D/PyAVEVAE3DExt/PyAVEVAE3DExt.vcxproj).
+
+2. Copy pyavevae3dext.pyd file from Build directory to [pyavevae3dext directory](../pyavevae3dext/).
+
+3. Open cmd and set path to the repository folder.
+
+4. Run any one of the below mentioned commands in cmd to build the wheel package.
+    - ```py -m build```
+    - ```python setup.py sdist bdist_wheel```
+
+5. To install the wheel package run any one of the below mentioned command.
+
+    - ```pip install .```
+    - ```pip install -e .```
+
+6. if you wish to upload PiPy use any one of the following command depending on your requirement,
+    
+    - ```python -m twine upload --repository dist/*```
+    - ```python -m twine upload --repository testpypi dist/*```
+
+    if required, pass ```--verbose``` argument in above commands to see the logs.
