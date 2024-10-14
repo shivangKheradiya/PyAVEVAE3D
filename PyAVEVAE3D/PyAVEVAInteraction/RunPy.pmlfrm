@@ -1,0 +1,65 @@
+setup form !!runPy resize
+  title 'Run Python'
+  textpane .pyCode anchor top + left + bottom + right at xmin ymin at x0 y0 width 40 height 20
+  path down
+  button .run anchor bottom + left 'Run' callback '!this.executePyCode()'
+  path right
+  button .clear 'Clear' anchor bottom + right at xmax form-size callback '!this.pyCode.clear()'
+  path down
+  
+  button .StartSysVenv 'Start Sys Env' anchor bottom + left at x0 ymax.clear + 0.2  callback '!this.StartSysEnv()'
+  button .StartVenv 'Start Venv' anchor bottom + left at xmax.StartSysVenv + 0.2 ymax.clear + 0.2 callback '!this.StarVenv()'
+  button .StopEnv 'Stop Env' anchor bottom + right at xmax  form-size ymax.clear + 0.2 callback '!this.StopEnv()'
+  
+  button .ShowConsole 'Show Console' anchor bottom + left at x0 ymax.StartSysVenv + 0.2  callback 'Console Show'
+  button .HideConsole 'Hide Console' anchor bottom + right at xmax form-size ymax.StartSysVenv + 0.2  callback 'Console Hide'
+
+  member .filename is STRING
+exit
+
+define method .runPy()
+
+  import 'PyAVEVAInteraction'
+  handle any
+  endhandle
+  using namespace 'PyAVEVAInteraction'
+  if ( undefined( !!PyAVEVAInteractionObj ) ) then
+    !!PyAVEVAInteractionObj = object PYAVEVAINTERACTIONOBJ()
+  endif
+
+  !this.filename = !!evar('AVEVA_DESIGN_USER') + 'tmpPyCode.py'
+
+  !file = object FILE(!this.filename)
+  if (!file.exists()) then
+    !lines = !file.readFile()
+    !this.pyCode.val = !lines
+  endif
+endmethod
+
+define method .executePyCode()
+  -- get contents of text pane
+  !pyCode = !this.pyCode.val
+
+  -- output them to a file
+  !file = object FILE(!this.filename)
+  !file.writeFile('OVERWRITE', !pyCode)
+
+  -- run in the pyCode
+  !!PyAVEVAInteractionObj.RunPyFile(!this.filename)
+endmethod
+
+define method .StarVenv()
+  if ( undefined( !!pyVenv ) ) then
+    !!alert.message(|Python Virtul Environment Cound not started. Please Define !!pyVenv.|)
+  else
+    !!PyAVEVAInteractionObj.StartVenvPy( !!pyVenv )
+  endif
+endmethod
+
+define method .StopEnv()
+  !!PyAVEVAInteractionObj.StopPy()
+endmethod
+
+define method .StartSysEnv()
+  !!PyAVEVAInteractionObj.StartSysPy()
+endmethod
