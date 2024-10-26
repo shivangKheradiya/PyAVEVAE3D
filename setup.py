@@ -7,7 +7,7 @@ print(module_path)
 
 setup(
     name='pyavevae3dext',
-    version='0.0.1',
+    version='0.0.2',
     description='Python Package Allows to interact with AVEVA E3D2.1.0.3 using AVEVA Embadded Python Interaction dll..',
     long_description=pathlib.Path("README.md").read_text(),
     long_description_content_type="text/markdown",
